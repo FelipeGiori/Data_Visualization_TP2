@@ -9,18 +9,20 @@ import plotly.graph_objs as go
 # Load data
 games = pd.read_csv("data/vgsales.csv")
 
-sales_df = games[['Genre', 'Platform', 'Global_Sales']]
-
-# Counts the number os titles per game genre and game platform and transforms
-# it into a matrix for the heatmap
+# Counts the number of titles per game genre and game platform, and transforms
+# it into a matrix for the heatmap hover info
 Titles = games.groupby(['Genre', 'Platform']).size().unstack(fill_value=0)
+
+# Sums the Global sales of a game's genre and platform, and transforms
+# it into a matrix for the heatmap
+sales_df = games[['Genre', 'Platform', 'Global_Sales']]
 Sales = sales_df.groupby(['Genre', 'Platform']).sum().unstack(fill_value=0)
 
 # Extracts the labels for the legend
 genres = list(Titles.index.values)
 platforms = list(Titles.columns.values)
 
-# Text of heatmap cells
+# Label of heatmap cells
 annotations = go.Annotations()
 for i, row in enumerate(Sales.values):
     for j, val in enumerate(row):
