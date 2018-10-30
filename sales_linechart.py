@@ -77,7 +77,7 @@ layout = go.Layout(
             yaxis={'title':'Number of units sold (Million)'},
             autosize=False,
             width=1200,
-            height=800
+            height=600
 )
 
 fig = go.Figure(data=data, layout=layout)

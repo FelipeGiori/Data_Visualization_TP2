@@ -22,7 +22,7 @@ count = Titles['count'].values
 trace = go.Scatter(
             x = year,
             y = count,
-            name="Number of game titles",
+            name="# titles",
             line=dict(
                 color='red',
                 width=2
@@ -38,7 +38,7 @@ layout = go.Layout(
             yaxis={'title':'Number of game titles'},
             autosize=False,
             width=1200,
-            height=800
+            height=600
 )
 
 fig = go.Figure(data=data, layout=layout)
