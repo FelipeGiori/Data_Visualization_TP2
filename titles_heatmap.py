@@ -47,7 +47,10 @@ for i, row in enumerate(Titles.values):
 layout = go.Layout(
             title='Millions of units of games sold per genre and platform',
             xaxis={'title':'Platform'},
-            yaxis={'title':'Genre'},
+            yaxis=go.layout.YAxis(
+                title="Genre",
+                automargin=True
+            ),
             annotations=annotations,
             autosize=False,
             width=1400,
