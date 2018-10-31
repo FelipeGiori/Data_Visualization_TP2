@@ -5,12 +5,14 @@ import pandas as pd
 import plotly.plotly as py
 import plotly.graph_objs as go\
 
+# Subset sales
 games = pd.read_csv("data/vgsales.csv")
 games = games[['Year', 'NA_Sales', 'EU_Sales', 'JP_Sales', 'Other_Sales', 'Global_Sales']]
 Sales = games.groupby(['Year']).sum()
 Sales = Sales.reset_index()
 Sales = Sales[:-2]
 
+# Vector for each line
 year = Sales.Year.values
 na_sales = Sales.NA_Sales.values
 jp_sales = Sales.JP_Sales.values
@@ -18,7 +20,7 @@ eu_sales = Sales.EU_Sales.values
 other_sales = Sales.Other_Sales.values
 global_sales = Sales.Global_Sales.values
 
-
+# Create and style the lines
 trace_na = go.Scatter(
             x = year,
             y = na_sales,
@@ -69,8 +71,10 @@ trace_global = go.Scatter(
             )
 )
 
+# Join the lines
 data = [trace_na, trace_jp, trace_eu, trace_other, trace_global]
 
+# Plot layout
 layout = go.Layout(
             title='Video games units sold by release year',
             xaxis={'title':'Year', 'dtick':2},
@@ -79,6 +83,7 @@ layout = go.Layout(
             width=1200,
             height=600
 )
+
 
 fig = go.Figure(data=data, layout=layout)
 py.iplot(fig, filename='games_sales_linechart')
